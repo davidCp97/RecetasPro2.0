@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -73,6 +74,31 @@ public class Conexion {
             con.close();
         } catch (SQLException e) {
         }
+    }
+     public ArrayList consultaReceta() {
+        ArrayList result = new ArrayList<>();
+        try {
+            String dbURL = "jdbc:ucanaccess://C:\\Users\\ingenieria\\Desktop\\recetas/Recetas.accdb"; //Dirección de donde está la base de datos
+            String username = ""; //Usuario de la base de datos
+            String password = ""; //Password del usuario de la base de datos
+            con = DriverManager.getConnection(dbURL, username, password);
+            String query = "Select nombre from receta"; //query a modificar (Select * from tabla1)
+            pst = con.prepareStatement(query);
+            rs = null;
+            try {
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    result.add(rs.getString("nombre"));
+                }
+                System.out.println(result);
+            } catch (SQLException sql) {
+            }
+            pst.close();
+            con.close();
+        } catch (SQLException e) {
+        }
+        return result;
+    
     }
 
 }

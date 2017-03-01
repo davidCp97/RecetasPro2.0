@@ -5,17 +5,31 @@
  */
 package Control;
 
+import Modelo.Conexion;
+import Modelo.ListaOrdenada;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+
 /**
  *
  * @author Ingenieria
  */
 public class ListaReceta extends javax.swing.JInternalFrame {
-
+     ArrayList<String> rec1 = new ArrayList<>();//Variable Global de Lista de recetas.
+     String valor = null;
     /**
      * Creates new form ListaReceta
      */
     public ListaReceta() {
         initComponents();
+        jComboBoxLista.removeAllItems();//Se borran las recetas actuales del Combobox
+        Conexion conex = new Conexion();
+        ArrayList nuev = new ArrayList<>(conex.consultaReceta());//Se trae una lista de las recetas.
+        for (int i = 0; i < nuev.size(); i++) {//Se llena durante el ciclo el Combobox con la lista de recetas.
+            String a = nuev.get(i).toString();
+            jComboBoxLista.addItem(a);
+        }
     }
 
     /**
@@ -50,8 +64,18 @@ public class ListaReceta extends javax.swing.JInternalFrame {
         jLabel1.setText("Buscar recetas");
 
         jComboBoxLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxListaActionPerformed(evt);
+            }
+        });
 
         jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarActionPerformed(evt);
+            }
+        });
 
         jTextAreaLista.setEditable(false);
         jTextAreaLista.setColumns(20);
@@ -60,6 +84,11 @@ public class ListaReceta extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTextAreaLista);
 
         jButtonOrdenarRecetas.setText("Ordenar Recetas");
+        jButtonOrdenarRecetas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenarRecetasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -175,6 +204,31 @@ public class ListaReceta extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBoxListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBoxListaActionPerformed
+
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        // TODO add your handling code here:
+        String receta = jTextAreaLista.getText(); //Se guarda en un String las recetas actuales.
+        String selec = null;
+        String rec = jComboBoxLista.getSelectedItem().toString(); //Se guarda en un String la receta seleccionada.
+        selec=rec;
+       receta = receta + "- " +rec+"\n"; //Se agrega ela receta seleccionada a la colección de seleccionados previamente.
+        jTextAreaLista.setText(receta); //Se actualiza la lista de recetas.
+        rec1.add(selec);//Se agrega la receta seleccionada a la variable Global que tiene todas las recetas seleccionados.
+        System.out.println(rec1);
+        Collections.sort(rec1);
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jButtonOrdenarRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarRecetasActionPerformed
+        // TODO add your handling code here:
+       ListaOrdenada mostrar = new ListaOrdenada();
+        jTextAreaOrdenado.setText(mostrar.mostrarRecetasordenadas(rec1));
+        
+    }//GEN-LAST:event_jButtonOrdenarRecetasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
