@@ -43,4 +43,8 @@ public class CrearReceta {
     
     
     //Método que realiza la inserción de un nuevo ingrediente a la Base de Datos.
+    public void insertarIngrediente(String insercion) {
+        String sql = "insert into Ingrediente (nombre_ingrediente) values ('" + insercion + "')";//Insercion: Nombre del ingrediente.
+        var.insertarABaseDeDatosBase(sql);
+    }
 }
