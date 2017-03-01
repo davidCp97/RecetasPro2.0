@@ -5,17 +5,29 @@
  */
 package Control;
 
+import Modelo.Conexion;
+import java.util.ArrayList;
+
 /**
  *
  * @author Ingenieria
  */
 public class BuscarPorIngredientes extends javax.swing.JInternalFrame {
 
+    ArrayList<String> ingre = new ArrayList<>();//Variable Global de Lista de ingredientes.
+
     /**
      * Creates new form BuscarPorIngredientes
      */
     public BuscarPorIngredientes() {
         initComponents();
+        jComboBoxLista.removeAllItems();//Se borran los ingredientes actuales del Combobox
+        Conexion conex = new Conexion();
+        ArrayList nuev = new ArrayList<>(conex.consultaIngredientes());//Se trae una lista de los ingredientes nuevos
+        for (int i = 0; i < nuev.size(); i++) {//Se llena durante el ciclo el Combobox con la lista de ingredientes.
+            String a = nuev.get(i).toString();
+            jComboBoxLista.addItem(a);
+        }
     }
 
     /**
@@ -52,14 +64,23 @@ public class BuscarPorIngredientes extends javax.swing.JInternalFrame {
         jComboBoxLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarActionPerformed(evt);
+            }
+        });
 
         jTextAreaLista.setEditable(false);
         jTextAreaLista.setColumns(20);
         jTextAreaLista.setRows(5);
-        jTextAreaLista.setEnabled(false);
         jScrollPane1.setViewportView(jTextAreaLista);
 
-        jButtonBuscarRecetas.setText("Ordenar Recetas");
+        jButtonBuscarRecetas.setText("Buscar Recetas");
+        jButtonBuscarRecetas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarRecetasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,7 +129,6 @@ public class BuscarPorIngredientes extends javax.swing.JInternalFrame {
         jTextAreaRecetas.setEditable(false);
         jTextAreaRecetas.setColumns(20);
         jTextAreaRecetas.setRows(5);
-        jTextAreaRecetas.setEnabled(false);
         jScrollPane2.setViewportView(jTextAreaRecetas);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -177,6 +197,23 @@ public class BuscarPorIngredientes extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        // TODO add your handling code here:
+        String total = jTextAreaLista.getText(); //Se guarda en un String los ingredientes actuales.
+        String valor = jComboBoxLista.getSelectedItem().toString(); //Se guarda en un String el ingrediente seleccionado.
+
+        total = total + "- " + valor+"\n"; //Se agrega el ingrediente seleccionado a la colección de seleccionados previamente.
+        jTextAreaLista.setText(total); //Se actualiza la lista de ingredientes seleccionados.
+        ingre.add(valor);//Se agrega el ingrediente seleccionado a la variable Global que tiene todos los ingredientes seleccionados.
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jButtonBuscarRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarRecetasActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_jButtonBuscarRecetasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

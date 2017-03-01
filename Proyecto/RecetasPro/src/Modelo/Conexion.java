@@ -29,7 +29,7 @@ public class Conexion {
     //Método base para realizar una consulta a la Base de Datos
     public void consultaABaseDeDatosBase(String consulta) {
         try {
-            String dbURL = "jdbc:ucanaccess://C:\\Users\\usuario\\Downloads\\Versiones RecetasPro\\Base de datos RecetasPro/Recetas.accdb"; //Dirección de donde está la base de datos
+            String dbURL = "jdbc:ucanaccess://C:\\Users\\Ingenieria\\Downloads\\Pre\\Nueva carpeta/Rest1.accdb"; //Dirección de donde está la base de datos
             String username = ""; //Usuario de la base de datos
             String password = ""; //Password del usuario de la base de datos
             con = DriverManager.getConnection(dbURL, username, password);
@@ -59,7 +59,7 @@ public class Conexion {
     //Método base para realizar una inserción en la base de datos
     public void insertarABaseDeDatosBase(String insercion) {
         try {
-            String dbURL = "jdbc:ucanaccess://C:\\Users\\usuario\\Downloads\\Versiones RecetasPro\\Base de datos RecetasPro/Recetas.accdb"; //Dirección de donde está la base de datos
+            String dbURL = "jdbc:ucanaccess://C:\\Users\\Ingenieria\\Downloads\\Pre\\Nueva carpeta\\Rest1.accdb"; //Dirección de donde está la base de datos
             String username = ""; //Usuario de la base de datos
             String password = ""; //Password del usuario de la base de datos
             con = DriverManager.getConnection(dbURL, username, password);
@@ -80,7 +80,7 @@ public class Conexion {
     public int consultaUltimoID() {
         int a = 0;
         try {
-            String dbURL = "jdbc:ucanaccess://C:\\Users\\usuario\\Downloads\\Versiones RecetasPro\\Base de datos RecetasPro/Recetas.accdb"; //Dirección de donde está la base de datos
+            String dbURL = "jdbc:ucanaccess://C:\\Users\\Ingenieria\\Downloads\\Pre\\Nueva carpeta/Rest1.accdb"; //Dirección de donde está la base de datos
             String username = ""; //Usuario de la base de datos
             String password = ""; //Password del usuario de la base de datos
 
@@ -106,7 +106,7 @@ public class Conexion {
     public ArrayList consultaIngredientes() {
         ArrayList result = new ArrayList<>();
         try {
-           String dbURL = "jdbc:ucanaccess://C:\\Users\\usuario\\Downloads\\Versiones RecetasPro\\Base de datos RecetasPro/Recetas.accdb"; //Dirección de donde está la base de datos
+            String dbURL = "jdbc:ucanaccess://C:\\Users\\Ingenieria\\Downloads\\Pre\\Nueva carpeta/Rest1.accdb"; //Dirección de donde está la base de datos
             String username = ""; //Usuario de la base de datos
             String password = ""; //Password del usuario de la base de datos
             con = DriverManager.getConnection(dbURL, username, password);
@@ -117,30 +117,6 @@ public class Conexion {
                 rs = pst.executeQuery();
                 while (rs.next()) {
                     result.add(rs.getString("nombre_ingrediente"));//Se solicita únicamente la columna de Nombre_ingrediente
-                }
-            } catch (SQLException sql) {
-            }
-            pst.close();
-            con.close();
-        } catch (SQLException e) {
-        }
-        return result;
-    }
-    
-    public ArrayList consultaCodigosRecetas() {
-        ArrayList result = new ArrayList<>();
-        try {
-           String dbURL = "jdbc:ucanaccess://C:\\Users\\usuario\\Downloads\\Versiones RecetasPro\\Base de datos RecetasPro/Recetas.accdb"; //Dirección de donde está la base de datos
-            String username = ""; //Usuario de la base de datos
-            String password = ""; //Password del usuario de la base de datos
-            con = DriverManager.getConnection(dbURL, username, password);
-            String query = "select codigo_receta from Receta;"; 
-            pst = con.prepareStatement(query);
-            rs = null;
-            try {
-                rs = pst.executeQuery();
-                while (rs.next()) {
-                    result.add(rs.getString("codigo_receta"));
                 }
             } catch (SQLException sql) {
             }

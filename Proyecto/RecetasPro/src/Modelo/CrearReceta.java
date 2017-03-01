@@ -42,5 +42,5 @@ public class CrearReceta {
     }
     
     
-    
+    //Método que realiza la inserción de un nuevo ingrediente a la Base de Datos.
 }
