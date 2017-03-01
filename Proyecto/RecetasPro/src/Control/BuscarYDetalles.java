@@ -5,6 +5,10 @@
  */
 package Control;
 
+import Modelo.buscarReceta;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author Ingenieria
@@ -16,7 +20,9 @@ public class BuscarYDetalles extends javax.swing.JInternalFrame {
      */
     public BuscarYDetalles() {
         initComponents();
+     
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,20 +35,18 @@ public class BuscarYDetalles extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBoxLista = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaResultados = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jButtonBuscar = new javax.swing.JButton();
+        nombreReceta = new javax.swing.JTextField();
 
         setClosable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Receta con Detalles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Selecciona la receta:");
-
-        jComboBoxLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel1.setText("Nombre receta:");
 
         jTextAreaResultados.setEditable(false);
         jTextAreaResultados.setColumns(20);
@@ -53,6 +57,11 @@ public class BuscarYDetalles extends javax.swing.JInternalFrame {
         jLabel2.setText("Resultados de la búsqueda");
 
         jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,10 +74,10 @@ public class BuscarYDetalles extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxLista, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(nombreReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
                         .addComponent(jButtonBuscar)
-                        .addGap(0, 248, Short.MAX_VALUE)))
+                        .addGap(0, 275, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(317, 317, 317)
@@ -81,12 +90,12 @@ public class BuscarYDetalles extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBoxLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBuscar))
+                    .addComponent(jButtonBuscar)
+                    .addComponent(nombreReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -110,14 +119,23 @@ public class BuscarYDetalles extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        buscarReceta ob = new buscarReceta();
+        String nombre = "";
+        nombre = this.nombreReceta.getText();
+        String n = ob.mostrarReceta(nombre);
+          jTextAreaResultados.setText(n);
+         
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JComboBox<String> jComboBoxLista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaResultados;
+    private javax.swing.JTextField nombreReceta;
     // End of variables declaration//GEN-END:variables
 }
