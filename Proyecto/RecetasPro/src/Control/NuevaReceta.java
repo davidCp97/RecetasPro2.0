@@ -346,7 +346,19 @@ public class NuevaReceta extends javax.swing.JInternalFrame {
 
     //Acción del botón Agregar nuevo ingrediente
     private void jButtonIngredienteNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngredienteNuevoActionPerformed
+        String nomIngrediente = jTextFieldNombreIngrediente.getText(); //Se trae el Nombre del TextField
+        CrearReceta crear = new CrearReceta();
+        crear.insertarIngrediente(nomIngrediente);//Se llama el método que registra un ingrediente nuevo a la BD
+        jTextAreaListaIngredientes.setText(crear.mostrarIngredientes());//Se actualiza el TextArea con los ingredientes nuevos.
+
+        jComboBoxIngredientes.removeAllItems();//Se Borra el listado actual de ingredientes del Combobox
+        Conexion conex = new Conexion();
+        ArrayList nuev = new ArrayList<>(conex.consultaIngredientes()); //Se trae una lista de los ingredientes nuevos
         
+        for (int i = 0; i < nuev.size(); i++) { //Se llena durante el ciclo el Combobox con la lista de ingredientes.
+            String a = nuev.get(i).toString();
+            jComboBoxIngredientes.addItem(a);
+        }
 
     }//GEN-LAST:event_jButtonIngredienteNuevoActionPerformed
 
@@ -400,8 +412,10 @@ public class NuevaReceta extends javax.swing.JInternalFrame {
             jButtonAgregarReceta.setEnabled(false);
 
             CrearReceta crear = new CrearReceta(); //Se crea el objeto para poder llamar el método de Ingreso de Nueva Receta:
-            crear.IngresoTablaReceta(jTextFieldNombreReceta.getText(), jTextAreaDescripcion.getText(), jTextFieldTiempoCoccion.getText(), ingre);
+            crear.IngresoTablaReceta(jTextFieldNombreReceta.getText(), jTextAreaDescripcion.getText(), jTextFieldTiempoCoccion.getText());
+            crear.IngresoTablaIngredienteReceta(ingre);
             ingre.clear();//Se Borra la lista actual de ingredientes seleccionados.
+            jTextAreaListaIngredientesReceta.setText("");
         }
 
 
