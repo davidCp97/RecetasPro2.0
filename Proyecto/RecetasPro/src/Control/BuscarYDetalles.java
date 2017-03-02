@@ -132,6 +132,10 @@ textAutoCompleter.setMode(0); // infijo
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Esto hace cosas en el programa
+     * @param evt 
+     */
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         buscarReceta ob = new buscarReceta();
         String nombre = "";
