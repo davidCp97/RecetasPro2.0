@@ -5,8 +5,12 @@
  */
 package Control;
 
+import Mensajes.InOut;
 import Modelo.Conexion;
 import java.util.ArrayList;
+import Modelo.Conexion;
+
+import Modelo.Listareceta;
 
 /**
  *
@@ -202,14 +206,27 @@ public class BuscarPorIngredientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String total = jTextAreaLista.getText(); //Se guarda en un String los ingredientes actuales.
         String valor = jComboBoxLista.getSelectedItem().toString(); //Se guarda en un String el ingrediente seleccionado.
-
+        jComboBoxLista.removeItem(valor);
         total = total + "- " + valor+"\n"; //Se agrega el ingrediente seleccionado a la colección de seleccionados previamente.
         jTextAreaLista.setText(total); //Se actualiza la lista de ingredientes seleccionados.
+
         ingre.add(valor);//Se agrega el ingrediente seleccionado a la variable Global que tiene todos los ingredientes seleccionados.
+        
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonBuscarRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarRecetasActionPerformed
-        // TODO add your handling code here:
+        Listareceta lista = new Listareceta(); //Se crea el objeto para poder llamar los métodos de Listareceta :
+        lista.ResLista(ingre);// Se hace uso del meto reslista y se envia como parametro los ingredientes con lo que se piensan listar las recetas que los contengan
+        
+        
+        
+        
+        ingre.clear();
+        jTextAreaLista.setEnabled(false);
+        jComboBoxLista.setEnabled(false);
+        jButtonAgregar.setEnabled(false);
+        jButtonBuscarRecetas.setEnabled(false);
+        jTextAreaRecetas.setText(lista.ResultadoNombre());//Se actualiza el TextArea con las recetas .
         
         
         
