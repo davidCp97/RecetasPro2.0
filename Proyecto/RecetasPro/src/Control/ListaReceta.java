@@ -7,7 +7,7 @@ package Control;
 
 /**
  *
- * @author Ingenieria
+ * @author Ingenieria, esto es una clase
  */
 public class ListaReceta extends javax.swing.JInternalFrame {
 
