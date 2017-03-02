@@ -2,7 +2,7 @@ package Control;
 
 import Modelo.Conexion;
 import Modelo.tiempoCoccion;
-
+import com.mxrck.autocompleter.TextAutoCompleter;
 import java.util.ArrayList;
 
         
@@ -11,6 +11,21 @@ public class BuscarNombreOTiempo extends javax.swing.JInternalFrame {
    
     public BuscarNombreOTiempo() {
         initComponents();
+        item();
+    }
+    public void item(){
+    TextAutoCompleter textAutoCompleter = new TextAutoCompleter(nombre1);
+        tiempoCoccion ob = new tiempoCoccion();
+        ArrayList<String> ar = new ArrayList<>();
+        ar = ob.nombreRecetaItem();
+        for (int i = 0; i < ar.size(); i++) {
+            Object get = ar.get(i);
+            
+            textAutoCompleter.addItem(ar.get(i).toString());
+        }
+
+textAutoCompleter.setMode(0); // infijo
+
         
     }
     
@@ -274,7 +289,8 @@ public class BuscarNombreOTiempo extends javax.swing.JInternalFrame {
           nombre = this.nombre1.getText();
           String n = ob.nombreReceta(nombre);
           jTextAreaResultados.setText(n);
-   
+          TextAutoCompleter textAutoCompleter = new TextAutoCompleter(nombre1);
+        textAutoCompleter.addItem("arroz");
           
     }//GEN-LAST:event_jButtonBuscarRecetaActionPerformed
 

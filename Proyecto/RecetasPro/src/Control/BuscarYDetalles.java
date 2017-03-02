@@ -6,7 +6,7 @@
 package Control;
 
 import Modelo.buscarReceta;
-
+import com.mxrck.autocompleter.TextAutoCompleter;
 import java.util.ArrayList;
 
 /**
@@ -20,9 +20,22 @@ public class BuscarYDetalles extends javax.swing.JInternalFrame {
      */
     public BuscarYDetalles() {
         initComponents();
-     
+        item();
     }
-   
+    public void item(){
+    TextAutoCompleter textAutoCompleter = new TextAutoCompleter(nombreReceta);
+        buscarReceta ob = new buscarReceta();
+        ArrayList<String> ar = new ArrayList<>();
+        ar = ob.nombreRecetaItem();
+        for (int i = 0; i < ar.size(); i++) {
+            Object get = ar.get(i);
+            textAutoCompleter.addItem(ar.get(i).toString());
+        }
+
+textAutoCompleter.setMode(0); // infijo
+
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,8 +137,10 @@ public class BuscarYDetalles extends javax.swing.JInternalFrame {
         String nombre = "";
         nombre = this.nombreReceta.getText();
         String n = ob.mostrarReceta(nombre);
+        
+        n+="Ingredientes:\n\n"+ob.mostrarRecetaIng(nombre);
           jTextAreaResultados.setText(n);
-         
+          TextAutoCompleter textAutoCompleter = new TextAutoCompleter(nombreReceta);
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
 

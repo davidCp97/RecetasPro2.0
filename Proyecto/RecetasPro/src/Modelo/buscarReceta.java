@@ -24,7 +24,7 @@ public class buscarReceta {
 public static void main(String[] args)throws SQLException{
 
          
-          System.out.println(mostrarReceta("Arroz Hindí"));
+          System.out.println(mostrarRecetaIng("Arroz Hindú"));
 
     }
     
@@ -72,5 +72,90 @@ public static void main(String[] args)throws SQLException{
         {}
           return m;
     }
+    public static String mostrarRecetaIng(String q){
+         ArrayList<String> ar = new ArrayList<>();
+        Scanner input = new Scanner(System.in);
+        String m="";
+          try{
+
+            String dbURL = "jdbc:ucanaccess://E:\\Nueva carpeta/Rest1.accdb";//Dorección base de datos
+            String username = "";
+            String password = "";
+            String nom="";
+            
+            con = DriverManager.getConnection(dbURL, username, password);
+            String query = "SELECT nombre_ingrediente FROM Ingrediente_receta, Receta WHERE  Ingrediente_receta.codigo_receta = Receta.codigo_receta AND nombre like \""+q+"*\";";//COnsulta
+            
+            pst = con.prepareStatement(query);
+            rs = null;
+            rs2 = null;
+         
+            try{
+                rs = pst.executeQuery();
+                
+                while(rs.next())
+                {
+                 //Se guardan las variables en un String
+                    m+=rs.getString("nombre_ingrediente")+"\n";
+                    
+                    
+                }
+ 
+                 
+               
+            }catch(SQLException sql){}
+            pst.close();
+        
+            con.close();
+             
+        }
+        catch(SQLException e)
+        {}
+          return m;
+    }
+    
+    //Método que devuelve el nombre de las recetas en un ArrayList
+    public static ArrayList nombreRecetaItem(){
+         ArrayList<String> ar = new ArrayList<>();
+        Scanner input = new Scanner(System.in);
+        String m="";
+          try{
+
+            String dbURL = "jdbc:ucanaccess://E:\\Nueva carpeta/Rest1.accdb";
+            String username = "";
+            String password = "";
+            String nom="";
+            
+            con = DriverManager.getConnection(dbURL, username, password);
+            String query = "SELECT nombre FROM Receta";
+            
+            pst = con.prepareStatement(query);
+            rs = null;
+            rs2 = null;
+         
+            try{
+                rs = pst.executeQuery();
+                
+                while(rs.next())
+                {
+                
+                    ar.add(rs.getString("nombre"));
+     
+                }
+  
+                 
+               
+            }catch(SQLException sql){}
+            pst.close();
+        
+            con.close();
+             
+        }
+        catch(SQLException e)
+        {}
+          return ar;
+    }
+    
+    
   
 }

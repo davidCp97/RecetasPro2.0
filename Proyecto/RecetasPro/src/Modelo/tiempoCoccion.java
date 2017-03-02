@@ -97,5 +97,48 @@ return a;
         {}
           return m;
     }
+    
+    //Método que devuelve un ArrayList con el nombre de las recetas
+    public static ArrayList nombreRecetaItem(){
+         ArrayList<String> ar = new ArrayList<>();
+        Scanner input = new Scanner(System.in);
+        String m="";
+          try{
+
+            String dbURL = "jdbc:ucanaccess://E:\\Nueva carpeta/Rest1.accdb";
+            String username = "";
+            String password = "";
+            String nom="";
+            
+            con = DriverManager.getConnection(dbURL, username, password);
+            String query = "SELECT nombre FROM Receta";
+            
+            pst = con.prepareStatement(query);
+            rs = null;
+            rs2 = null;
+         
+            try{
+                rs = pst.executeQuery();
+                
+                while(rs.next())
+                {
+              
+                    ar.add(rs.getString("nombre"));
+             
+                }
+          
+                 
+               
+            }catch(SQLException sql){}
+            pst.close();
+        
+            con.close();
+             
+        }
+        catch(SQLException e)
+        {}
+          
+          return ar;
+    }
 
 }
