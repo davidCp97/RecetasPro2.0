@@ -7,7 +7,7 @@ package Control;
 
 /**
  *
- * @author ingenieria
+ * @author ingenieria, otro comentario
  */
 public class NuevaReceta extends javax.swing.JInternalFrame {
 
